@@ -11,9 +11,7 @@ e('input').addEventListener('input', async function() {
   Pikari.commit()
 })
 Pikari.addChangeListener(function(){e('input').value = Pikari.data.get('input')})
-Pikari.addStartListener(function(){
-  if (Pikari.data.has('input')) e('input').value=Pikari.data.get('input'); else Pikari.data.set('input',"")
-})
+Pikari.addStartListener(function(){if (Pikari.data.has('input')) e('input').value=Pikari.data.get('input');})
 Pikari.start()
 </script>
 </html>
