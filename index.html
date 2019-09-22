@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Hello Pikari</title></head>
+<body><input id='input'/></body>
+<script src='pikari.js'></script>
+<script>
+window.e=function(id){return document.getElementById(id)}
+e('input').addEventListener('input', async function() {
+  if (!await Pikari.setLocks('input')) return
+  Pikari.data.set('input', e('input').value)
+  Pikari.commit()
+})
+Pikari.addChangeListener(function(){e('input').value = Pikari.data.get('input')})
+Pikari.addStartListener(function(){
+  if (Pikari.data.has('input')) e('input').value=Pikari.data.get('input'); else Pikari.data.set('input',"")
+})
+Pikari.start()
+</script>
+</html>
