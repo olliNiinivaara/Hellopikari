@@ -21,13 +21,13 @@ Pikari serves all static assets at appdir directory given as command line parame
 If file *pikari.js* does not exist in *current working directory*, *pikari* creates it there when launched. *Pikari.js* contains the *pikari API*. The file contains JSDoc comments and the resulting API documentation is [here](http://htmlpreview.github.io/?https://github.com/olliNiinivaara/Pikari/blob/master/doc/pikari_API.html).
 
 ### *Pikari* saves data to disk
-In *Pikarihello* application, write some text to input field and close and restart the *Pikari* server. Reload the page. Text will reappear. The data is saved to a [sqlite](https://www.sqlite.org/) database called data.db in the *Hellopikari* directory. Notice how the file modification time changes as you write text to input field. The database content can be inspected with a tool such as [DB Browser for SQLite](https://sqlitebrowser.org/). When your data schema changes, just delete old *data.db*.
+In *Pikarihello* application, write some text to input field and close and restart the *Pikari* server. Reload the page. Text will reappear. The data is saved to a [sqlite](https://www.sqlite.org/) database called *data.db* in the *Hellopikari* directory. Notice how the file modification time changes as you write text to input field. The database content can be inspected with a tool such as [DB Browser for SQLite](https://sqlitebrowser.org/). When your data schema changes, just delete old *data.db*.
 
 ### *Pikari* syncs data between all on-line users
-Open *Hellopikari* in two or more browser windows and notice how the input text is kept in sync while you do modifications in any application.
+Open *[Hellopikari](http://127.0.0.1:8080/)* in two or more browser windows and notice how the input text is kept in sync while you do modifications in any application.
 
 ### Writing prototypes with *Pikari* is surprisingly easy
-Study the *Hellopikari* [source code](https://github.com/olliNiinivaara/Hellopikari/blob/master/index.html) and notice how easily all this can be achieved. Open your local *index.html*, do some changes to it (like change the title) and reload the page. The changes are immediately effective, which makes developing a breeze. You can even change the *pikari.js*, if deemed necessary (and get the original back just by deleting it).
+Study the *Hellopikari* [source code](https://github.com/olliNiinivaara/Hellopikari/blob/master/index.html) and notice how easily all this can be achieved. Open your local *index.html* in some text editor, do some changes to it (like change the title) and reload the page. The changes are immediately effective, which makes developing a breeze. You can even change the *pikari.js*, if deemed necessary (and get the original back just by deleting it).
 
 ### Pikari can be configured with *pikari.toml*
 If file *pikari.toml* does not exist in *current working directory*, *pikari* creates it there when launched. *Pikari.toml* file allows you to configure *Pikari*. Available options are explained in it and further notes are available in [server manual](https://github.com/olliNiinivaara/Pikari/blob/master/doc/pikari_man.md).
