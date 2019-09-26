@@ -3,7 +3,7 @@
 ## Installation
 1. *This application requires the [Pikari server-side web application framework](https://github.com/olliNiinivaara/Pikari/)*. Install it first, if you don't have it.
 2. Create a subdirectory named *Hellopikari* under the directory where *pikari* is installed.
-3. Save *[index.html](https://raw.githubusercontent.com/olliNiinivaara/Hellopikari/master/index.html)* to *Hellopikari* folder.
+3. Save *[index.html](https://github.com/olliNiinivaara/Hellopikari/raw/master/index.html)* to *Hellopikari* folder.
 
 ## Running
 1. Open shell, and in the directory where *pikari* is installed, give following command:
