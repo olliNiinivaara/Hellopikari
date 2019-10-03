@@ -1,7 +1,7 @@
 # 🏆 Hellopikari
 
 ## Installation
-1. *This application requires the [Pikari server-side web application framework](https://github.com/olliNiinivaara/Pikari/)*. Install it first, if you don't have it.
+1. This application requires *[Pikari](https://github.com/olliNiinivaara/Pikari/)* [Backend-as-a-Service](https://www.cloudflare.com/learning/serverless/glossary/backend-as-a-service-baas/). Install it first, if you don't have it.
 2. Create a subdirectory named *Hellopikari* under the directory where *pikari* is installed.
 3. Save *[index.html](https://github.com/olliNiinivaara/Hellopikari/raw/master/index.html)* to *Hellopikari* folder.
 
