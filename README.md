@@ -1,39 +1,93 @@
-# 🏆 Hellopikari
+# 🏆 Hellopikari - Tutorial for Pikari
 
-## Installation
-1. This application requires *[Pikari](https://github.com/olliNiinivaara/Pikari/)* [Backend-as-a-Service](https://www.cloudflare.com/learning/serverless/glossary/backend-as-a-service-baas/). Install it first, if you don't have it.
-2. Create a subdirectory named *Hellopikari* under the directory where *pikari* is installed.
-3. Save *[index.html](https://github.com/olliNiinivaara/Hellopikari/raw/master/index.html)* to *Hellopikari* folder.
+This repo contains two files:
+- this README contains step-by-step instructions for *[Pikari](https://github.com/olliNiinivaara/Pikari/)* [Backend-as-a-Service](https://www.cloudflare.com/learning/serverless/glossary/backend-as-a-service-baas/) Server user interface.
+- *[index.html](https://github.com/olliNiinivaara/Hellopikari/raw/master/index.html)* is a simple application for Pikari that is used as an example in this tutorial.
 
-## Running
-1. Open shell, and in the directory where *pikari* is installed, give following command:
-- Linux:
-  ./pikari -appdir Hellopikari
-2. With a javascript-enabled web browser, open the url <http://127.0.0.1:8080>
-3. When you are done, press Ctrl-C in the shell
+## Starting Pikari from command line
+1. Install [Pikari](https://github.com/olliNiinivaara/Pikari/) first, if you don't have it yet.
+1. Open shell, and in the directory where *Pikari* is installed, give following command:
+    - Linux, macOS: ./pikari
+    - Windows: pikari
+1. Take note that admin password is printed
+1. With a javascript-enabled web browser, open the url <http://127.0.0.1:8080>
 
-## Lessons
+## Stopping Pikari
+Press Ctrl-C in the shell or send SIGINT if running as a service
 
-### Pikari is a web server
-Pikari serves all static assets at appdir directory given as command line parameter. Create a file called *test.txt* to *Hellopikari* directory and save some text into it. Open url <http://127.0.0.1:8080/test.txt>. The file is served.
+## Optional command line parameters
+Synopsis: **pikari** \[**-password** _password_\] \[**-port** _port_\]
 
-### The front-end javascript API is in *pikari.js* 
-If file *pikari.js* does not exist in *current working directory*, *pikari* creates it there when launched. *Pikari.js* contains the *pikari API*. The file contains JSDoc comments and the resulting API documentation is [here](http://htmlpreview.github.io/?https://github.com/olliNiinivaara/Pikari/blob/master/doc/pikari_API.html).
+\[-password _password_\]  
+Password for administering Pikari. If no password is given, a random password is generated and printed to stdout when Pikari is started.
+
+\[-port _port_\]
+By default Pikari runs at port 8080. you can change this with port parameter.
+
+## The index
+When Pikari first starts, it creates _index.html_ to it's directory and serves it as home page. Index asks user name and lists all subdirectories as installed applications, including _Admin_ application, which is created for administering Pikari. You can change _index.html_ and admin files as you wish (The original(s) will be recreated if you delete file(s)).
+At first, _Admin_ is the only available application. To install another application, open _Admin_ by clicking it and enter the admin password.
+
+## Installing an application
+1. In Admin, Select Upload new application from...Git repository
+1. Enter server directory to upload to: _Hello Pikari_
+1. Enter URL to upload from: https://github.com/olliNiinivaara/Hellopikari.git
+1. Press proceed
+You can also upload local directory to Pikari with *Local directory* -button. You can even manually create (and delete) subdirectories, but then you need to log on to your server and Pikari reflects manual changes only after Pikari is restarted.
+
+## Using applications
+You can select an application from index at http://127.0.0.1:8080/ or open it directly at http://127.0.0.1:8080/appdir where appdir is the directory of the application. User name can be submitted to application with parameter _user_. Now, open <http://127.0.0.1:8080/Hello%20Pikari>
+
+## The basic Pikari services
+
+### Remote application administration
+In Admin, select Edit... button (the button with pen icon) for some application. An update form appears that lets you to:
+- Update the application (replaces all files with new ones)
+- Disable the application (it is then hidden from Index and cannot be used (but the static files remain accessible))
+- Delete exisiting data
+- Delete the whole application
 
 ### *Pikari* saves data to disk
-In *Pikarihello* application, write some text to input field and close and restart the *Pikari* server. Reload the page. Text will reappear. The data is saved to a [sqlite](https://www.sqlite.org/) database called *data.db* in the *Hellopikari* directory. Notice how the file modification time changes as you write text to input field. The database content can be inspected with a tool such as [DB Browser for SQLite](https://sqlitebrowser.org/). When your data schema changes, just delete old *data.db*.
+In *Hello Pikari* application, write some text to input field and close and restart the *Pikari* server. Reload the page. Text will reappear. The data is saved to a [sqlite](https://www.sqlite.org/) database called *data.db* in the *Hello Pikari* directory. Notice how the file modification time changes as you write text to input field. The database content can be inspected with a tool such as [DB Browser for SQLite](https://sqlitebrowser.org/). When your data schema changes, just delete old *data.db*.
 
 ### *Pikari* syncs data between all on-line users
-Open *[Hellopikari](http://127.0.0.1:8080/)* in two or more browser windows and notice how the input text is kept in sync while you do modifications in any application.
+Open *Hello Pikari* in two or more browser windows and notice how the input text is kept in sync while you do modifications in any client.
 
-### Writing prototypes with *Pikari* is surprisingly easy
-Study the *Hellopikari* [source code](https://github.com/olliNiinivaara/Hellopikari/blob/master/index.html) and notice how easily all this can be achieved. Open your local *index.html* in some text editor, do some changes to it (like change the title) and reload the page. The changes are immediately effective, which makes developing a breeze. You can even change the *pikari.js*, if deemed necessary (and get the original back just by deleting it).
+## Developing an application
 
-### Pikari can be configured with *pikari.toml*
-If file *pikari.toml* does not exist in *current working directory*, *pikari* creates it there when launched. *Pikari.toml* file allows you to configure *Pikari*. Available options are explained in it and further notes are available in [server manual](https://github.com/olliNiinivaara/Pikari/blob/master/doc/pikari_man.md).
+### The front-end javascript API *pikari.js* 
+*Pikari* API is contained in file *pikari.js*. You can modify it and if deleted, the original will be recreated. The file contains JSDoc comments and the resulting API documentation is [here](http://htmlpreview.github.io/?https://github.com/olliNiinivaara/Pikari/blob/master/doc/pikari_API.html).
 
-### Only for prototyping
-While you can do [evolutionary](https://en.wikipedia.org/wiki/Software_prototyping#Evolutionary_prototyping) front-end prototyping with *Pikari*, the *Pikari* back-end itself is strictly [throw-away](https://en.wikipedia.org/wiki/Software_prototyping#Throwaway_prototyping) grade. It namely lacks all security - everyone is potentially able to bypass your UI and then read, modify, mess up and delete any data. If you publish a prototype to Internet, always start *Pikari* with a password, use a HTTPS+WSS reverse proxy and instruct testers to enter only fake data.
+### Writing code
+Study the *Hello Pikari* [source code](https://github.com/olliNiinivaara/Hellopikari/blob/master/index.html) and notice how easily the application is created. Open your local *index.html* file in some text editor, do some changes to it (like change the title) and reload the page. The changes are immediately effective, which makes developing a breeze. Tip: When you change the application served by pikari, you may need to
+[hard reload](https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache) the browser page.
 
-### There is more
+### No security
+While you can do [evolutionary](https://en.wikipedia.org/wiki/Software_prototyping#Evolutionary_prototyping) front-end prototyping with *Pikari*, the *Pikari* back-end itself is strictly [throw-away](https://en.wikipedia.org/wiki/Software_prototyping#Throwaway_prototyping) grade. It namely lacks all security - everyone is potentially able to bypass your UI and then read, modify, mess up and delete any data. If you publish a prototype to Internet, always use a HTTPS+WSS reverse proxy and instruct testers to enter only fake data. The web socket upgrade request is sent
+to path */ws* which you must hail. The configuration for [NGINX](https://www.nginx.com/) (say) should be something like this:
+
+```nginx
+upstream pikariws {
+  server 127.0.0.1:8080;
+  keepalive 100;
+}
+server {
+  location /pikari/ {
+    proxy_pass http://127.0.0.1:8080/;
+  }
+  location /pikari/ws {
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_http_version 1.1;
+    proxy_connect_timeout 8h;
+    proxy_send_timeout 8h;
+    proxy_read_timeout 8h;
+    proxy_pass http://pikariws/ws;
+  }
+```
+
+## There is more
 There are more examples listed at [*Pikari* web site](https://github.com/olliNiinivaara/Pikari/). But best way to learn is to start writing your own prototype with *Pikari*!
+
+## Errors, feature requests, etc.
+See GitHub Issues: <https://github.com/olliNiinivaara/Pikari/issues>
