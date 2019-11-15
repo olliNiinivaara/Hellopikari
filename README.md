@@ -33,6 +33,7 @@ At first, _Admin_ is the only available application. To install another applicat
 1. Enter server directory to upload to: _Hello Pikari_
 1. Enter URL to upload from: https://github.com/olliNiinivaara/Hellopikari.git
 1. Press proceed
+
 You can also upload local directory to Pikari with *Local directory* -button. You can even manually create (and delete) subdirectories, but then you need to log on to your server and Pikari reflects manual changes only after Pikari is restarted.
 
 ## Using applications
@@ -44,11 +45,11 @@ You can select an application from index at http://127.0.0.1:8080/ or open it di
 In Admin, select Edit... button (the button with pen icon) for some application. An update form appears that lets you to:
 - Update the application (replaces all files with new ones)
 - Disable the application (it is then hidden from Index and cannot be used (but the static files remain accessible))
-- Delete exisiting data
+- Delete existing data
 - Delete the whole application
 
 ### *Pikari* saves data to disk
-In *Hello Pikari* application, write some text to input field and close and restart the *Pikari* server. Reload the page. Text will reappear. The data is saved to a [sqlite](https://www.sqlite.org/) database called *data.db* in the *Hello Pikari* directory. Notice how the file modification time changes as you write text to input field. The database content can be inspected with a tool such as [DB Browser for SQLite](https://sqlitebrowser.org/). When your data schema changes, just delete old *data.db*.
+In *Hello Pikari* application, write some text to input field and close and restart the *Pikari* server. Reload the page. Text will reappear. The data is saved to a [sqlite](https://www.sqlite.org/) database called *data.db* in the *Hello Pikari* directory. Notice how the file modification time changes as you write text to input field. The database content can be inspected with a tool such as [DB Browser for SQLite](https://sqlitebrowser.org/). When your data schema changes, check the _Delete existing data_ checkbox when updating.
 
 ### *Pikari* syncs data between all on-line users
 Open *Hello Pikari* in two or more browser windows and notice how the input text is kept in sync while you do modifications in any client.
