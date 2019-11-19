@@ -25,8 +25,8 @@ Password for administering Pikari. If no password is given, a random password is
 By default Pikari runs at port 8080. you can change this with port parameter.
 
 ## The index
-When Pikari first starts, it creates _index.html_ to it's directory and serves it as home page. Index asks user name and lists all subdirectories as installed applications, including _Admin_ application, which is created for administering Pikari. You can change _index.html_ and admin files as you wish (The original(s) will be recreated if you delete file(s)).
-At first, _Admin_ is the only available application. To install another application, open _Admin_ by clicking it and enter the admin password.
+When Pikari first starts, it creates _index.html_ to it's directory and serves it as home page. Index asks user name and lists all subdirectories as installed applications, including _Admin_ application, which is created for managing other Pikari apps. You can change _index.html_ and admin files as you wish (The original(s) will be recreated if you delete file(s)).
+At first, _Admin_ is the only available application. To install another application, open _Admin_ by clicking it and enter admin password.
 
 ## Installing an application
 1. In Admin, Select Upload new application from...Git repository
@@ -34,25 +34,28 @@ At first, _Admin_ is the only available application. To install another applicat
 1. Enter URL to upload from: https://github.com/olliNiinivaara/Hellopikari.git
 1. Press proceed
 
-You can also upload local directory to Pikari with *Local directory* -button. You can even manually create (and delete) subdirectories, but then you need to log on to your server and Pikari reflects manual changes only after Pikari is restarted.
+You can also upload local directory to Pikari with *Local directory* -button. You can even log on to your server and manually create and update apps and files, but then new apps become visible only after Pikari is restarted.
 
 ## Using applications
-You can select an application from index at http://127.0.0.1:8080/ or open it directly at http://127.0.0.1:8080/appdir where appdir is the directory of the application. User name can be submitted to application with parameter _user_. Now, open <http://127.0.0.1:8080/Hello%20Pikari>
+You can select an application from index at http://127.0.0.1:8080/ or open it directly at http://127.0.0.1:8080/appdir where appdir is the directory of the application. User name can be submitted to application with parameter _user_. For example, if you installed *Hello Pikari*, you can now open <http://127.0.0.1:8080/Hello%20Pikari?user=tutee>
 
-## The basic Pikari services
+## Basic functionality
 
-### Remote application administration
+### Automated database persistence
+In *Hello Pikari* application, write some text to input field and close and restart the *Pikari* server. Reload the page. Text will reappear. The data is saved to a [sqlite](https://www.sqlite.org/) database called *data.db* in the *Hello Pikari* directory. Notice how the file modification time changes as you write text to input field. The database content can be inspected with a tool such as [DB Browser for SQLite](https://sqlitebrowser.org/). When your data schema changes, check the _Delete existing data_ checkbox when updating.
+
+### Web socket -based data sync between all on-line users
+Open *Hello Pikari* in two or more browser windows and notice how the input text is kept in sync while you do modifications in any client.
+
+### Static file serving
+If an application does not have an *index.html* file, directory contents are listed *as is* and can be browsed and selected.
+
+## Administrator GUI
 In Admin, select Edit... button (the button with pen icon) for some application. An update form appears that lets you to:
 - Update the application (replaces all files with new ones)
 - Disable the application (it is then hidden from Index and cannot be used (but the static files remain accessible))
 - Delete existing data
 - Delete the whole application
-
-### *Pikari* saves data to disk
-In *Hello Pikari* application, write some text to input field and close and restart the *Pikari* server. Reload the page. Text will reappear. The data is saved to a [sqlite](https://www.sqlite.org/) database called *data.db* in the *Hello Pikari* directory. Notice how the file modification time changes as you write text to input field. The database content can be inspected with a tool such as [DB Browser for SQLite](https://sqlitebrowser.org/). When your data schema changes, check the _Delete existing data_ checkbox when updating.
-
-### *Pikari* syncs data between all on-line users
-Open *Hello Pikari* in two or more browser windows and notice how the input text is kept in sync while you do modifications in any client.
 
 ## Developing an application
 
@@ -64,7 +67,7 @@ Study the *Hello Pikari* [source code](https://github.com/olliNiinivaara/Hellopi
 [hard reload](https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache) the browser page.
 
 ### No security
-While you can do [evolutionary](https://en.wikipedia.org/wiki/Software_prototyping#Evolutionary_prototyping) front-end prototyping with *Pikari*, the *Pikari* back-end itself is strictly [throw-away](https://en.wikipedia.org/wiki/Software_prototyping#Throwaway_prototyping) grade. It namely lacks all security - everyone is potentially able to bypass your UI and then read, modify, mess up and delete any data. If you publish a prototype to Internet, always use a HTTPS+WSS reverse proxy and instruct testers to enter only fake data. The web socket upgrade request is sent
+While you can do [evolutionary](https://en.wikipedia.org/wiki/Software_prototyping#Evolutionary_prototyping) front-end prototyping with *Pikari*, the *Pikari* back-end itself is strictly [throw-away](https://en.wikipedia.org/wiki/Software_prototyping#Throwaway_prototyping) grade. It namely lacks all security - all users could bypass your UI and then read, modify, mess up and delete any data. If you publish a prototype to Internet, always use a HTTPS+WSS reverse proxy and instruct testers to enter only fake data. The web socket upgrade request is sent
 to path */ws* which you must hail. The configuration for [NGINX](https://www.nginx.com/) (say) should be something like this:
 
 ```nginx
