@@ -93,5 +93,6 @@ server {
 ## There is more
 There are more examples listed at [*Pikari* web site](https://github.com/olliNiinivaara/Pikari/). But best way to learn is to start writing your own prototype with *Pikari*!
 
-## Errors, feature requests, etc.
-See GitHub Issues: <https://github.com/olliNiinivaara/Pikari/issues>
+## Try on-line
+
+This application is testable on-line *as-is* at <https://verkkoyhteys.fi/pikari/hello>. Don't write too fast or you'll receive *429 Too Many Requests* ;-)
